@@ -1,70 +1,177 @@
-# Getting Started with Create React App
+## Application Details and function
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack fitness application built with React, Flask, and MySQL that allows users to manage exercise movements, generate randomized workouts, and dynamically configure database connections at runtime.
 
-## Available Scripts
+This project was developed for the MSCS Database Principles course and demonstrates proper separation of concerns between frontend, backend, and database layers.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- User authentication (login & signup) (No hardcoded credentials. For demonstration purposes only. All creds are accepted for testing purposes)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Runtime MySQL connection configuration (no hard-coded credentials in frontend)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Live database connection status indicator
 
-### `npm test`
+- View exercise movements and edit reps and weight volumes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Random workout generator (1 movement per category)
 
-### `npm run build`
+- Recommended reps and weight stored at the database level
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Connection warnings and recovery messaging
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Architecture Overview
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+React (Frontend)
+│
+├── UI Components (LandingPage, Movements, Workout Generator)
+│
+├── Fetch API calls
+│
+Flask (Backend API)
+│
+├── doLogin.py (API routes)
+├── BLL (Business Logic Layer)
+├── DAL (Data Access Layer)
+│
+MySQL Database
+│
+├── fitness database
+├── normalized tables
 
-### `npm run eject`
+## Key Design Principles
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Frontend never accesses the database directly
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+All database interaction is routed through Flask
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Configuration updates happen via API endpoints
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Business logic is isolated from SQL queries
 
-## Learn More
+## Tech Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Frontend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React
 
-### Code Splitting
+- JavaScript (ES6+)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- CSS (custom, no frameworks)
 
-### Analyzing the Bundle Size
+Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Python 3.13
 
-### Making a Progressive Web App
+- Flask
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Flask-CORS
 
-### Advanced Configuration
+- mysql-connector-python
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Database
 
-### Deployment
+- MySQL 8+
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Fully normalized relational schema
 
-### `npm run build` fails to minify
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+final-project/
+├── back-end/
+│   ├── doLogin.py
+│   ├── config.py
+│   ├── bll/
+│   │   └── workout_bll.py
+│   └── dal/
+│       └── workout_dal.py
+│
+├── src/
+│   ├── components/
+│   │   ├── Movements.jsx
+│   │   ├── RandomWorkoutGen.jsx
+│   │   └── ConnectionModal.jsx
+│   ├── LandingPage.jsx
+│   ├── App.js
+│   └── App.css
+│
+└── README.md
+
+*** Database Schema ***
+
+Core tables include:
+
+- categories
+
+- equipment
+
+- movements
+
+- workouts
+
+- workout_movements
+
+- users
+
+- user_workout_progress
+
+Each movement stores:
+
+- Category
+
+- Equipment
+
+- Recommended reps
+
+- Recommended weight
+
+How to use app:
+
+1. Set up test environments:
+
+backend:
+1a. Backend is python. http://127.0.0.1:5000/api/test-connection
+2a. Cmd which must run in terminal is: py doLogin.py - runs on http://127.0.0.1:5000
+
+frontend: 
+1b. Frontend is Js/React. http://localhost:3000/
+2b. Cmd which be run to relative path is npm start
+
+2. config.py should have necessary credentials. These may be modified in-program under connection settings (some issues have been resolved, however this may still be buggy as UseStates do not seem to work reliably.)
+
+
+Method	Endpoint	Description
+GET	/api/test-connection	Verify database connectivity
+POST	/api/update-config	Update MySQL credentials
+GET	/api/movements	Retrieve all movements
+POST	/api/movements/update	Update reps/weight
+GET	/api/random-workout	Generate random workout
+
+
+*** Notes & Limitations ***
+Backend must be running for database connectivity
+Passwords are not returned to the frontend
+This project uses Flask’s development server (not production-ready)
+Designed for academic demonstration, not deployment
+
+Educational Objectives
+
+- This project demonstrates:
+
+- Proper use of DAL/BLL architecture
+
+- SQL normalization and relational design
+
+- Secure configuration handling
+
+- RESTful API design
+
+- Frontend/backend separation
+
+*** Author details ***
+
+Dave Parisi
+M.S. Computer Science (Software Engineering)
+Merrimack College
+Database Principles – Final Project
+December 2025

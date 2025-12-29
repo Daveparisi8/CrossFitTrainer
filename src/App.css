@@ -1,38 +1,282 @@
+/* Global Styles */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0d0d0d;
+  color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+/* Auth Box (Shared Container) */
+
+.auth-box {
+  background-color: #1a1a1a;
+  padding: 35px 45px;
+  border-radius: 14px;
+  width: 350px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.45);
+  animation: fadeIn 0.4s ease;
+}
+
+.auth-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Inputs & Selects */
+
+.auth-box input,
+.auth-box select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 18px;
+  border: 1px solid #333;
+  background-color: #111;
+  color: #f5f5f5;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.25s;
+}
+
+.auth-box input:focus,
+.auth-box select:focus {
+  outline: none;
+  border-color: #6ca8ff;
+  background-color: #0e0e0e;
+}
+
+.auth-box select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23aaa' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.auth-box option {
+  background-color: #111;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button,
+.button-outline {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-sizing: border-box;
+}
+
+/* Primary Button */
+.button {
+  background-color: #333;
+  border: 1px solid transparent;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.button:hover {
+  background-color: #444;
+  transform: translateY(-2px);
 }
 
-@keyframes App-logo-spin {
+/* Outline Button */
+.button-outline {
+  background: transparent;
+  color: #ddd;
+  border: 1px solid #555;
+}
+
+.button-outline:hover {
+  border-color: #777;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Database Status Badge */
+
+.db-container {
+  position: relative;
+}
+
+.db-status {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid;
+  text-transform: lowercase;
+}
+
+.db-status.connected {
+  color: #b7ffcc;
+  background-color: rgba(32, 32, 32, 0.8);
+  border-color: #3aff8f;
+}
+
+.db-status.disconnected {
+  color: #ffb7b7;
+  background-color: rgba(32, 32, 32, 0.8);
+  border-color: #ff3a3a;
+}
+
+/* Layouts */
+
+.auth-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.auth-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-panel {
+  flex: 1;
+  overflow: hidden;
+}
+
+.video-panel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.6s ease;
+}
+
+.video-panel:hover video {
+  opacity: 0.15;
+}
+
+/* Background Video Pages */
+
+.bg-video-page,
+.login-bg {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bg-video,
+.login-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  filter: blur(1px);
+}
+
+.bg-video-page::after,
+.login-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.bg-overlay,
+.login-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Movements Table */
+
+.movements-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.movements-table th,
+.movements-table td {
+  text-align: center;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.movements-table th {
+  font-size: 0.85rem;
+  color: #aaa;
+  border-bottom: 4px solid #8a0e0e;
+}
+
+.movements-table td {
+  border-bottom: 1px solid #222;
+}
+
+.movements-table .button,
+.movements-table .button-outline {
+  min-width: 90px;
+  margin: 0 auto;
+}
+
+/* Filters (Movements Page) */
+
+.filter-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 20px 0 30px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+/* Home Screen */
+
+.home-box {
+  text-align: center;
+}
+
+/* Animations */
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
