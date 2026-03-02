@@ -126,8 +126,8 @@ function Movements({ onClose }) {
                             <th>Name</th>
                             <th>Category</th>
                             <th>Equipment</th>
-                            <th>Recommended Reps</th>
-                            <th>Recommended Weight (lbs)</th>
+                            <th>Repetitions</th>
+                            <th>Weight (volume)(lbs)</th>
                             <th>Scale (modify) Values</th>
                         </tr>
                     </thead>

@@ -69,10 +69,10 @@ function LandingPage({ username, onLogout }) {
                 }`}
             >
                 {checking
-                    ? "checking..."
+                    ? "connecting..."
                     : dbStatus.connected
-                        ? `mysql: ${dbStatus.name}`
-                        : "db disconnected"}
+                        ? `Connected to ${dbStatus.name} database`
+                        : "No Database found"}
             </div>
 
             <h2>{username}'s main menu</h2>
@@ -88,12 +88,7 @@ function LandingPage({ username, onLogout }) {
     {/* MAIN MENU BUTTONS */}
 
             <div className="button-group">
-                <button
-                    className="button-outline"
-                    onClick={() => setShowConnectionModal(true)}
-                >
-                    Connection Settings
-                </button>
+
 
                 <button
                     className="button-outline"
@@ -110,10 +105,11 @@ function LandingPage({ username, onLogout }) {
                 >
                     View All Movements
                 </button>
-
                 <button className="button-outline" onClick={onLogout}>
                     Log Out
                 </button>
+
+
             </div>
 
     {/* ACTIVE CONTENT */}

@@ -19,7 +19,7 @@ function LoginForm({ onBack, onLogin }) {
 
             <form onSubmit={handleSubmit}>
 
-                <label>Username</label>
+                <label>What is your name?</label>
                 <input 
                     type="text"
                     value={username}
@@ -27,17 +27,10 @@ function LoginForm({ onBack, onLogin }) {
                     required
                 />
 
-                <label>Password</label>
-                <input 
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
 
                 <div className="button-group">
                     <button className="button" type="submit">
-                        Log In
+                        Start!
                     </button>
 
                     <button 

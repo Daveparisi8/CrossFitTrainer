@@ -37,16 +37,9 @@ function App() {
 
                             <button 
                                 className="button"
-                                onClick={() => setScreen("signup")}
-                            >
-                                Register
-                            </button>
-
-                            <button 
-                                className="button"
                                 onClick={() => setScreen("login")}
                             >
-                                Log In
+                                Start Here
                             </button>
                         </div>
                     </div>
