@@ -6,8 +6,6 @@ import LandingPage from "./LandingPage";
 import loginVideo from "./assets/snatch.mp4";
 import chalkVideo from "./assets/chalk.mp4";
 
-    {/*Main App function*/}
-
 function App() {
     const [screen, setScreen] = useState("home"); 
     const [currentUser, setCurrentUser] = useState(null);

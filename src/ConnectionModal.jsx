@@ -61,11 +61,11 @@ function ConnectionModal({ onClose, onSuccess, isConnected, dbName }) {
 
     return (
         <div className="modal-overlay">
-            <div className="auth-box" style={{ width: "420px" }}>
+            <div className="auth-box connection-modal">
                 <h2>Database Connection Settings</h2>
 
                 {isConnected && (
-                    <p style={{ fontSize: "0.8rem", color: "#ffcc66" }}>
+                    <p className="status-text warning">
                         ⚠ You are currently connected to <strong>{dbName}</strong>.
                         Updating credentials disrupt the active connection.
                     </p>
@@ -83,8 +83,8 @@ function ConnectionModal({ onClose, onSuccess, isConnected, dbName }) {
                     onChange={handleChange}
                 />
 
-                {status && <p style={{ color: "#6affb0" }}>{status}</p>}
-                {error && <p style={{ color: "#ff7777" }}>{error}</p>}
+                {status && <p className="status-text success">{status}</p>}
+                {error && <p className="status-text error">{error}</p>}
 
                 <button className="button" onClick={handleSave}>
                     Save & Test

@@ -81,10 +81,7 @@ function Movements({ onClose }) {
     );
 
     return (
-        <div
-            className="auth-box movements-box"
-            style={{ width: "1200px", maxWidth: "95vw" }}
-        >
+        <div className="auth-box movements-box">
             <h2>All CrossFit Movements</h2>
             <p>
                 Browse movements, filter by category or equipment,
@@ -119,8 +116,8 @@ function Movements({ onClose }) {
             </div>
 
             {/* Table */}
-            <div style={{ maxHeight: "450px", overflowY: "auto" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <div className="table-scroll">
+                <table className="movements-table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -153,7 +150,7 @@ function Movements({ onClose }) {
                                             step="1"
                                             value={newReps}
                                             onChange={e => setNewReps(e.target.value)}
-                                            style={{ width: "80px" }}
+                                            className="table-input-sm"
                                         />
                                     ) : m.recommended_reps > 0 ? (
                                         m.recommended_reps
@@ -169,7 +166,7 @@ function Movements({ onClose }) {
                                             step="0.01"
                                             value={newWeight}
                                             onChange={e => setNewWeight(e.target.value)}
-                                            style={{ width: "100px" }}
+                                            className="table-input-md"
                                         />
                                     ) : m.recommended_weight > 0 ? (
                                         Number(m.recommended_weight).toFixed(2)
@@ -200,7 +197,7 @@ function Movements({ onClose }) {
 
                         {filteredMovements.length === 0 && (
                             <tr>
-                                <td colSpan="6" style={{ textAlign: "center", padding: "20px" }}>
+                                <td colSpan="6">
                                     No movements match the selected filters.
                                 </td>
                             </tr>
@@ -209,13 +206,14 @@ function Movements({ onClose }) {
                 </table>
             </div>
 
-            <button
-                className="button-outline"
-                style={{ marginTop: "20px" }}
-                onClick={onClose}
-            >
-                Close
-            </button>
+            <div className="panel-actions">
+                <button
+                    className="button-outline"
+                    onClick={onClose}
+                >
+                    Close
+                </button>
+            </div>
         </div>
     );
 }

@@ -1,37 +1,71 @@
 /* Global Styles */
 
+:root {
+  --bg-0: #0d0d0d;
+  --bg-1: #111;
+  --bg-2: #1a1a1a;
+  --line-1: #2a2a2a;
+  --line-2: #333;
+  --text-1: #f5f5f5;
+  --text-2: #aaa;
+  --accent-1: #6ca8ff;
+  --radius-1: 8px;
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --control-h: 44px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #0d0d0d;
-  color: #f5f5f5;
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-0);
+  color: var(--text-1);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+#root {
+  min-height: 100%;
 }
 
 .App {
+  width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 /* Auth Box (Shared Container) */
 
 .auth-box {
-  background-color: #1a1a1a;
+  background-color: var(--bg-2);
   padding: 35px 45px;
   border-radius: 14px;
   width: 350px;
-  border: 1px solid #2a2a2a;
+  max-width: 95vw;
+  border: 1px solid var(--line-1);
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.45);
   animation: fadeIn 0.4s ease;
 }
 
 .auth-box h2 {
   text-align: center;
-  margin-bottom: 25px;
+  margin: 0 0 var(--space-4);
   font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.auth-box p {
+  margin-top: 0;
+  line-height: 1.45;
 }
 
 /* Inputs & Selects */
@@ -39,12 +73,13 @@ html, body {
 .auth-box input,
 .auth-box select {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0 18px;
-  border: 1px solid #333;
-  background-color: #111;
-  color: #f5f5f5;
-  border-radius: 8px;
+  min-height: var(--control-h);
+  padding: 10px var(--space-2);
+  margin: var(--space-1) 0 var(--space-3);
+  border: 1px solid var(--line-2);
+  background-color: var(--bg-1);
+  color: var(--text-1);
+  border-radius: var(--radius-1);
   font-size: 14px;
   transition: 0.25s;
 }
@@ -52,7 +87,7 @@ html, body {
 .auth-box input:focus,
 .auth-box select:focus {
   outline: none;
-  border-color: #6ca8ff;
+  border-color: var(--accent-1);
   background-color: #0e0e0e;
 }
 
@@ -73,15 +108,20 @@ html, body {
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
 }
 
 .button,
 .button-outline {
   width: 100%;
-  padding: 12px;
-  border-radius: 8px;
+  min-height: var(--control-h);
+  padding: 10px var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-1);
   font-size: 15px;
+  font-weight: 600;
+  line-height: 1.1;
   cursor: pointer;
   transition: 0.25s;
   box-sizing: border-box;
@@ -90,7 +130,6 @@ html, body {
 /* Primary Button */
 .button {
   background-color: #333;
-  border: 1px solid transparent;
   color: white;
 }
 
@@ -106,16 +145,30 @@ html, body {
   border: 1px solid #555;
 }
 
+.button:disabled,
+.button-outline:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .button-outline:hover {
   border-color: #777;
   color: white;
   transform: translateY(-2px);
 }
 
+.button:focus-visible,
+.button-outline:focus-visible {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 2px;
+}
+
 /* Database Status Badge */
 
 .db-container {
   position: relative;
+  width: min(460px, 95vw);
 }
 
 .db-status {
@@ -127,6 +180,13 @@ html, body {
   border-radius: 6px;
   border: 1px solid;
   text-transform: lowercase;
+}
+
+.db-helper {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  text-align: center;
+  margin-bottom: var(--space-3);
 }
 
 .db-status.connected {
@@ -172,6 +232,14 @@ html, body {
   opacity: 0.15;
 }
 
+.home-box {
+  text-align: center;
+}
+
+.home-box h1 {
+  margin: 0 0 14px;
+}
+
 /* Background Video Pages */
 
 .bg-video-page,
@@ -209,20 +277,68 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+}
+
+/* Modal */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.62);
+  z-index: 50;
+}
+
+.connection-modal {
+  width: min(460px, 95vw);
+}
+
+.status-text {
+  margin: 6px 0 10px;
+  font-size: 0.9rem;
+}
+
+.status-text.success {
+  color: #6affb0;
+}
+
+.status-text.error {
+  color: #ff7777;
+}
+
+.status-text.warning {
+  color: #ffcc66;
 }
 
 /* Movements Table */
 
+.movements-box {
+  width: min(1200px, 95vw);
+}
+
 .movements-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table-scroll {
+  max-height: 450px;
+  overflow-y: auto;
+  border: 1px solid #202020;
+  border-radius: 8px;
 }
 
 .movements-table th,
 .movements-table td {
   text-align: center;
-  padding: 10px;
+  padding: 12px 10px;
   vertical-align: middle;
+  line-height: 1.35;
 }
 
 .movements-table th {
@@ -233,6 +349,31 @@ html, body {
 
 .movements-table td {
   border-bottom: 1px solid #222;
+}
+
+.movements-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.movements-table tbody tr:hover {
+  background: rgba(108, 168, 255, 0.08);
+}
+
+.movements-table th {
+  position: sticky;
+  top: 0;
+  background: #151515;
+  z-index: 1;
+}
+
+.table-input-sm {
+  width: 80px;
+  margin: 0 auto;
+}
+
+.table-input-md {
+  width: 100px;
+  margin: 0 auto;
 }
 
 .movements-table .button,
@@ -246,6 +387,7 @@ html, body {
 .filter-row {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
   margin: 20px 0 30px;
 }
@@ -253,7 +395,8 @@ html, body {
 .filter-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  min-width: 220px;
 }
 
 .filter-group label {
@@ -262,10 +405,38 @@ html, body {
   margin-bottom: 6px;
 }
 
-/* Home Screen */
+.workout-panel {
+  width: min(640px, 95vw);
+}
 
-.home-box {
-  text-align: center;
+.workout-list {
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+.workout-item {
+  list-style: none;
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #111;
+}
+
+.muted {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.panel-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.panel-actions .button,
+.panel-actions .button-outline {
+  max-width: 240px;
 }
 
 /* Animations */
@@ -278,5 +449,30 @@ html, body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .auth-layout {
+    flex-direction: column;
+  }
+
+  .video-panel {
+    min-height: 260px;
+  }
+
+  .auth-box {
+    padding: 24px;
+  }
+
+  .filter-group {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .db-status {
+    position: static;
+    display: inline-block;
+    margin-bottom: 14px;
   }
 }

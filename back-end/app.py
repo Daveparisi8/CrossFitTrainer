@@ -1,18 +1,5 @@
-from flask import jsonify
-from RandomWorkoutGen import RandomWorkoutGenerator
+from doLogin import app
 
 
-@app.route("/api/my-workout", methods=["GET"])
-def my_workout():
-    try:
-        workout = RandomWorkoutGenerator.generate()
-        return jsonify({
-            "status": "success",
-            "workout": workout
-        })
-    except Exception as e:
-        return jsonify({
-            "status": "error",
-            "message": str(e)
-        }), 500
-
+if __name__ == "__main__":
+    app.run(debug=True)

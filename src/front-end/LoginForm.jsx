@@ -6,7 +6,6 @@ import "./logon.css";
 
 function LoginForm({ onBack, onLogin }) {
     const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();

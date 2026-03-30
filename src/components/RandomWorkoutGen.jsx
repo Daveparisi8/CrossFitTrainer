@@ -32,7 +32,7 @@ function RandomWorkoutGen({ onClose }) {
     };
 
     return (
-        <div className="auth-box" style={{ width: "600px" }}>
+        <div className="auth-box workout-panel">
             <h2>Random Workout Generator</h2>
             <p>
                 Generates one movement per category using recommended reps and weights.
@@ -47,37 +47,27 @@ function RandomWorkoutGen({ onClose }) {
             </button>
 
             {error && (
-                <p style={{ color: "#ff7777", marginTop: "10px" }}>
+                <p className="status-text error">
                     {error}
                 </p>
             )}
 
             {workout.length > 0 && (
-                <ul style={{ marginTop: "20px", paddingLeft: "0" }}>
+                <ul className="workout-list">
                     {workout.map((item, index) => (
-                        <li
-                            key={index}
-                            style={{
-                                listStyle: "none",
-                                marginBottom: "14px",
-                                padding: "14px",
-                                border: "1px solid #333",
-                                borderRadius: "8px",
-                                background: "#111"
-                            }}
-                        >
+                        <li key={index} className="workout-item">
                             <strong>{item.category_name}</strong><br />
 
                             {item.movement_name}<br />
 
-                            <span style={{ fontSize: "0.85rem", color: "#aaa" }}>
+                            <span className="muted">
                                 Equipment: {item.equipment_name}
                             </span>
 
                             {item.recommended_reps > 0 && (
                                 <>
                                     <br />
-                                    <span style={{ fontSize: "0.85rem" }}>
+                                    <span className="muted">
                                         Reps: {item.recommended_reps}
                                     </span>
                                 </>
@@ -86,7 +76,7 @@ function RandomWorkoutGen({ onClose }) {
                             {item.recommended_weight > 0 && (
                                 <>
                                     <br />
-                                    <span style={{ fontSize: "0.85rem" }}>
+                                    <span className="muted">
                                         Weight: {Number(item.recommended_weight).toFixed(2)} lbs
                                     </span>
                                 </>
@@ -96,7 +86,7 @@ function RandomWorkoutGen({ onClose }) {
                 </ul>
             )}
 
-            <div style={{ marginTop: "20px" }}>
+            <div className="panel-actions">
                 <button
                     className="button-outline"
                     onClick={handleClose}

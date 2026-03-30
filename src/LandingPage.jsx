@@ -14,8 +14,6 @@ function LandingPage({ username, onLogout }) {
 
     const [checking, setChecking] = useState(false);
 
-    {/* Checks SQL connectivity */}
-
     const checkConnection = async () => {
         setChecking(true);
 
@@ -38,13 +36,9 @@ function LandingPage({ username, onLogout }) {
         }
     };
 
-    {/* Runs once on page load: */}
-
     useEffect(() => {
         checkConnection();
     }, []);
-
-    {/* Render active content */}
 
     const renderSection = () => {
         if (activeSection === "workout") {
@@ -59,7 +53,7 @@ function LandingPage({ username, onLogout }) {
     };
 
     return (
-        <div className="auth-box db-container" style={{ width: "420px" }}>
+        <div className="auth-box db-container">
 
     {/* DB STATUS BADGE */}
 
@@ -78,7 +72,7 @@ function LandingPage({ username, onLogout }) {
             <h2>{username}'s main menu</h2>
 
             {!dbStatus.connected && (
-                <p style={{ fontSize: "0.85rem", color: "#aaa", textAlign: "center" }}>
+                <p className="db-helper">
                     If your credentials are correct but the database is unreachable,
                     you may need to reboot your test environment or restart the backend
                     before the connection activates.
@@ -104,6 +98,13 @@ function LandingPage({ username, onLogout }) {
                     onClick={() => setActiveSection("movements")}
                 >
                     View All Movements
+                </button>
+
+                <button
+                    className="button-outline"
+                    onClick={() => setShowConnectionModal(true)}
+                >
+                    Connection Settings
                 </button>
                 <button className="button-outline" onClick={onLogout}>
                     Log Out

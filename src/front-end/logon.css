@@ -1,32 +1,13 @@
-/* logon CSS */
+/* Auth form helpers */
 
-.button {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    margin: 20px;
-
-    background-color: #4ae2a3;
-    color: rgb(0, 0, 0);
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
-.button:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
-}
-
-.button:active {
-    transform: translateY(0);
-    filter: brightness(0.9);
-}
-
-.button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+.auth-box label {
+    font-size: 0.9rem;
+    color: #cfcfcf;
+    margin: 2px 0 4px;
 }
